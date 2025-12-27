@@ -185,7 +185,8 @@ server/
 ### Phase 2: Server API - Types & Utilities
 
 - [x] **Step 4**: Create server API types in `server/types/api.ts`
-- [ ] **Step 5**: Create mock storage utility in `server/utils/storage.ts` (in-memory data store)
+- [x] **Step 5**: Create mock storage utility in `server/utils/storage.ts` (in-memory data store)
+  - Note: Implemented `server/utils/storage.ts` — an in-memory store using Maps with functions for listing, creating, retrieving, deleting sessions, saving PDF filename, adding/listing messages, and test seed/reset utilities.
 - [ ] **Step 6**: Create mock chatbot utility in `server/utils/chatbot.ts` (simple response generator)
 
 ### Phase 3: Server API - Session Endpoints
