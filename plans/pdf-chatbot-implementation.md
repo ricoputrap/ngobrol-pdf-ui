@@ -200,7 +200,8 @@ CRITICAL: Every execution step in this plan MUST include:
 
 - [x] **Step 7**: Create GET sessions list endpoint in `server/api/sessions/index.get.ts`
   - Note: Implemented `server/api/sessions/index.get.ts` and test `server/api/sessions/__tests__/index.get.test.ts`.
-- [ ] **Step 8**: Create POST new session endpoint in `server/api/sessions/index.post.ts`
+- [x] **Step 8**: Create POST new session endpoint in `server/api/sessions/index.post.ts`
+  - Note: Implemented `server/api/sessions/index.post.ts` and test `server/api/sessions/__tests__/index.post.test.ts`. All 4 tests pass: creates sessions with default/custom titles, unique IDs, and proper timestamps. Also updated `vitest.setup.ts` to mock `readBody` for Nuxt auto-imports.
 - [ ] **Step 9**: Create GET single session endpoint in `server/api/sessions/[id].get.ts`
 - [ ] **Step 10**: Create DELETE session endpoint in `server/api/sessions/[id].delete.ts`
 - [ ] **Step 11**: Create POST upload PDF endpoint in `server/api/sessions/[id]/upload.post.ts`
