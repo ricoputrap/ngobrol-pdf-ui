@@ -79,12 +79,12 @@ server/
 // Response: { session: Session }
 
 // DELETE /api/sessions/:id
-// Response: { success: boolean }
+// Response: 204 No Content (empty body)
 
 // POST /api/sessions/:id/upload
 // Protocol: REST with multipart/form-data (SYNCHRONOUS for MVP)
 // Body: FormData { file: File }
-// Response: { success: boolean, fileName: string }
+// Response: { success: boolean, file_name: string }
 //
 // Why SYNCHRONOUS upload for MVP?
 // 1. Simple implementation - no task queues or polling needed
@@ -115,16 +115,18 @@ server/
 ```typescript
 // POST /api/messages
 // Protocol: REST
-// Body: { sessionId: string, content: string }
+// Body: { session_id: string, content: string }
 // Response: { message: Message }
 
-// GET /api/messages/stream?sessionId=xxx&messageId=xxx
+// GET /api/messages/stream?session_id=xxx&message_id=xxx
 // Protocol: Server-Sent Events (SSE)
 // Response: text/event-stream
 // Events: { type: 'token' | 'done', data: string }
 //
 // Why SSE for chat streaming?
 // - One-directional server-to-client streaming (perfect for AI responses)
+// - Token-by-token streaming creates typewriter effect like ChatGPT
+// - Event types: "token" (each word), "done" (complete), "error" (failure)
 // - Simpler than WebSocket for this use case
 // - Built on HTTP, works with standard proxies and load balancers
 // - Automatic reconnection handling
@@ -133,27 +135,29 @@ server/
 
 ### Database Design (In-Memory for Mock)
 
+**Naming Convention:** All field names use `snake_case` to match FastAPI backend conventions.
+
 ```typescript
 // Session Schema
 {
   id: string;
   title: string;
-  pdfFileName: string | null;
-  createdAt: string; // ISO string
-  updatedAt: string; // ISO string
+  pdf_file_name: string | null;
+  created_at: string; // ISO string
+  updated_at: string; // ISO string
 }
 
 // Message Schema
 {
   id: string;
-  sessionId: string;
+  session_id: string;
   role: "user" | "assistant";
   content: string;
   timestamp: string; // ISO string
 }
 ```
 
-**Note:** PDF content is NOT stored in the Session schema. The actual PDF file will be stored separately in the backend's file system or object storage, referenced only by `pdfFileName`.
+**Note:** PDF content is NOT stored in the Session schema. The actual PDF file will be stored separately in the backend's file system or object storage, referenced only by `pdf_file_name`.
 
 ### API Strategy
 
@@ -180,7 +184,7 @@ server/
 
 ### Phase 2: Server API - Types & Utilities
 
-- [ ] **Step 4**: Create server API types in `server/types/api.ts`
+- [x] **Step 4**: Create server API types in `server/types/api.ts`
 - [ ] **Step 5**: Create mock storage utility in `server/utils/storage.ts` (in-memory data store)
 - [ ] **Step 6**: Create mock chatbot utility in `server/utils/chatbot.ts` (simple response generator)
 
