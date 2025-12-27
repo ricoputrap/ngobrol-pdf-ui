@@ -169,29 +169,37 @@ server/
 
 ## Module Structure Check
 
-- [ ] Confirmed that new files are colocated within their modules
-- [ ] Confirmed types are using .ts and are properly exported
-- [ ] Confirmed shared utilities are truly global, not module-specific
-- [ ] Confirmed server API follows RESTful conventions
+- [ ] Confirmed that new files are colocated within their modules.
+- [ ] Confirmed types are using .ts and are properly exported.
+- [ ] Confirmed shared utilities are truly global, not module-specific.
+- [ ] Confirmed server API follows RESTful conventions.
+- [ ] Confirmed that every logic change has a colocated test file (`*.test.ts` or `*.spec.ts`) and that the test(s) are executed immediately after the step is implemented.
 
 ## Execution Steps
 
+CRITICAL: Every execution step in this plan MUST include:
+
+- creation or update of a colocated test file that directly tests the logic changed in that step, and
+- execution of the test(s) for that step (record the result in the plan note).
+  Each checklist item below therefore represents "implement code AND create/update corresponding test(s) AND run those tests".
+
 ### Phase 1: Project Setup & Configuration
 
-- [x] **Step 1**: Install required dependencies (Pinia, @vueuse/core for composables)
-- [x] **Step 2**: Configure Nuxt modules and add Pinia store setup in `nuxt.config.ts`
-- [x] **Step 3**: Create shared type definitions in `app/shared/types/common.ts`
+- [x] **Step 1**: Install required dependencies (Pinia, @vueuse/core for composables) — create or update any test-related scripts (e.g., `package.json` test script) and run tests as part of this step.
+- [x] **Step 2**: Configure Nuxt modules and add Pinia store setup in `nuxt.config.ts` — add a colocated test (where applicable) and run it to confirm configuration does not break imports.
+- [x] **Step 3**: Create shared type definitions in `app/shared/types/common.ts` — create `app/shared/types/__tests__/common.test.ts` (or equivalent) to validate exported types/interfaces and run tests.
 
 ### Phase 2: Server API - Types & Utilities
 
 - [x] **Step 4**: Create server API types in `server/types/api.ts`
 - [x] **Step 5**: Create mock storage utility in `server/utils/storage.ts` (in-memory data store)
-  - Note: Implemented `server/utils/storage.ts` — an in-memory store using Maps with functions for listing, creating, retrieving, deleting sessions, saving PDF filename, adding/listing messages, and test seed/reset utilities.
-- [ ] **Step 6**: Create mock chatbot utility in `server/utils/chatbot.ts` (simple response generator)
+- [x] **Step 6**: Create mock chatbot utility in `server/utils/chatbot.ts` (simple response generator)
+  - Note: Implemented `server/utils/chatbot.ts` — provides `generate_response(session_id, prompt)` and `stream_response(session_id, prompt, options?)` (async generator) to support synchronous response generation and SSE streaming for the frontend mock.
 
 ### Phase 3: Server API - Session Endpoints
 
-- [ ] **Step 7**: Create GET sessions list endpoint in `server/api/sessions/index.get.ts`
+- [x] **Step 7**: Create GET sessions list endpoint in `server/api/sessions/index.get.ts`
+  - Note: Implemented `server/api/sessions/index.get.ts` and test `server/api/sessions/__tests__/index.get.test.ts`.
 - [ ] **Step 8**: Create POST new session endpoint in `server/api/sessions/index.post.ts`
 - [ ] **Step 9**: Create GET single session endpoint in `server/api/sessions/[id].get.ts`
 - [ ] **Step 10**: Create DELETE session endpoint in `server/api/sessions/[id].delete.ts`
