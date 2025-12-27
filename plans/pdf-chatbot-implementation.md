@@ -175,7 +175,7 @@ server/
 ### Phase 1: Project Setup & Configuration
 
 - [x] **Step 1**: Install required dependencies (Pinia, @vueuse/core for composables)
-- [ ] **Step 2**: Configure Nuxt modules and add Pinia store setup in `nuxt.config.ts`
+- [x] **Step 2**: Configure Nuxt modules and add Pinia store setup in `nuxt.config.ts`
 - [ ] **Step 3**: Create shared type definitions in `app/shared/types/common.ts`
 
 ### Phase 2: Server API - Types & Utilities
