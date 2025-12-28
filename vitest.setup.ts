@@ -13,6 +13,11 @@ globalThis.getRouterParam = vi.fn((event: any, name: string) => {
   return event?.context?.params?.[name] || null;
 });
 
+// Mock Nuxt's auto-imported readMultipartFormData
+globalThis.readMultipartFormData = vi.fn(async (event: any) => {
+  return event.multipartData || [];
+});
+
 // Mock h3's createError and setResponseStatus
 vi.mock("h3", async () => {
   const actual = await vi.importActual<typeof import("h3")>("h3");
