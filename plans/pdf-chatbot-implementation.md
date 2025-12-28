@@ -202,8 +202,10 @@ CRITICAL: Every execution step in this plan MUST include:
   - Note: Implemented `server/api/sessions/index.get.ts` and test `server/api/sessions/__tests__/index.get.test.ts`.
 - [x] **Step 8**: Create POST new session endpoint in `server/api/sessions/index.post.ts`
   - Note: Implemented `server/api/sessions/index.post.ts` and test `server/api/sessions/__tests__/index.post.test.ts`. All 4 tests pass: creates sessions with default/custom titles, unique IDs, and proper timestamps. Also updated `vitest.setup.ts` to mock `readBody` for Nuxt auto-imports.
-- [ ] **Step 9**: Create GET single session endpoint in `server/api/sessions/[id].get.ts`
-- [ ] **Step 10**: Create DELETE session endpoint in `server/api/sessions/[id].delete.ts`
+- [x] **Step 9**: Create GET single session endpoint in `server/api/sessions/[id].get.ts`
+  - Note: Implemented `server/api/sessions/[id].get.ts` and test `server/api/sessions/__tests__/[id].get.test.ts`. All 5 tests pass: retrieves session with messages, retrieves empty session, returns 404 for non-existent session, returns 400 for missing ID, verifies snake_case fields. Also updated `vitest.setup.ts` to mock `getRouterParam`.
+- [x] **Step 10**: Create DELETE session endpoint in `server/api/sessions/[id].delete.ts`
+  - Note: Implemented `server/api/sessions/[id].delete.ts` and test `server/api/sessions/__tests__/[id].delete.test.ts`. All 5 tests pass: deletes session and returns 204 No Content (null body), returns 404 for non-existent session, returns 400 for missing ID, deletes all associated messages, verifies isolation between sessions. Also updated `vitest.setup.ts` to mock `setResponseStatus` in h3 module.
 - [ ] **Step 11**: Create POST upload PDF endpoint in `server/api/sessions/[id]/upload.post.ts`
 
 ### Phase 4: Server API - Message Endpoints

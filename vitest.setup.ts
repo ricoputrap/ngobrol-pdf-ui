@@ -8,7 +8,12 @@ globalThis.readBody = vi.fn(async (event: any) => {
   return event.body || {};
 });
 
-// Mock h3's createError
+// Mock Nuxt's auto-imported getRouterParam
+globalThis.getRouterParam = vi.fn((event: any, name: string) => {
+  return event?.context?.params?.[name] || null;
+});
+
+// Mock h3's createError and setResponseStatus
 vi.mock("h3", async () => {
   const actual = await vi.importActual<typeof import("h3")>("h3");
   return {
@@ -21,5 +26,10 @@ vi.mock("h3", async () => {
         return error;
       },
     ),
+    setResponseStatus: vi.fn((event: any, status: number) => {
+      if (event?.node?.res) {
+        event.node.res.statusCode = status;
+      }
+    }),
   };
 });
