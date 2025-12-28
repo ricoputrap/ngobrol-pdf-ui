@@ -15,10 +15,12 @@ globalThis.$fetch = mockFetch as any;
 
 // Mock File for Node environment
 if (typeof File === "undefined") {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   globalThis.File = class File {
     name: string;
     type: string;
     size: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(bits: any[], name: string, options?: { type?: string }) {
       this.name = name;
       this.type = options?.type || "";
@@ -347,7 +349,7 @@ describe("useSessionsStore", () => {
       });
       expect(result).toBe(true);
       expect(store.sessions.length).toBe(1);
-      expect(store.sessions[0].id).toBe("sess-2");
+      expect(store.sessions[0]?.id).toBe("sess-2");
       expect(store.isLoading).toBe(false);
       expect(store.error).toBeNull();
     });

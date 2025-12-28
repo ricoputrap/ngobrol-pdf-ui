@@ -10,7 +10,7 @@ Build a web-based chat application using **Nuxt 4 + Vue 3 + TypeScript + Nuxt UI
 - Vue 3 (v3.5.25)
 - TypeScript (v5.9.3)
 - Nuxt UI (v4.2.1) - Tailwind CSS based component library
-- Pinia (will be added for state management)
+- Pinia (v2.1.7) - State management
 
 ## Architecture Decisions
 
@@ -40,6 +40,7 @@ app/
 │   ├── types/
 │   └── utils/
 ├── stores/
+│   └── sessions.ts          # Pinia store for session management
 ├── pages/
 └── layouts/
 
@@ -185,8 +186,8 @@ CRITICAL: Every execution step in this plan MUST include:
 
 ### Phase 1: Project Setup & Configuration
 
-- [x] **Step 1**: Install required dependencies (Pinia, @vueuse/core for composables) — create or update any test-related scripts (e.g., `package.json` test script) and run tests as part of this step.
-- [x] **Step 2**: Configure Nuxt modules and add Pinia store setup in `nuxt.config.ts` — add a colocated test (where applicable) and run it to confirm configuration does not break imports.
+- [x] **Step 1**: Install required dependencies (Pinia for state management, @vueuse/core for composables, vitest for testing) — create or update any test-related scripts (e.g., `package.json` test script) and run tests as part of this step.
+- [x] **Step 2**: Configure Nuxt modules (including @pinia/nuxt) in `nuxt.config.ts` — add a colocated test (where applicable) and run it to confirm configuration does not break imports.
 - [x] **Step 3**: Create shared type definitions in `app/shared/types/common.ts` — create `app/shared/types/__tests__/common.test.ts` (or equivalent) to validate exported types/interfaces and run tests.
 
 ### Phase 2: Server API - Types & Utilities
@@ -222,8 +223,9 @@ CRITICAL: Every execution step in this plan MUST include:
 
 - [x] **Step 15**: Create session types in `app/modules/sessions/types.ts`
   - Note: Implemented `app/modules/sessions/types.ts` with frontend types for Session, Message, and API response/request types. All types use snake_case to match backend API. Created test `app/modules/sessions/__tests__/types.test.ts` with 11 tests validating type structures, null handling, snake_case naming convention. Test suite total: 72 passed (72).
-- [x] **Step 16**: Create session composable in `app/modules/sessions/composables/useSessions.ts` (API integration)
-  - Note: Implemented `app/modules/sessions/composables/useSessions.ts` with methods for fetchSessions, createSession, fetchSession, deleteSession, uploadPdf, and utility methods. Uses $fetch for API calls with reactive state (sessions, currentSession, isLoading, error). Created test `app/modules/sessions/composables/__tests__/useSessions.test.ts` with 17 tests covering all methods, error handling, local state updates, and loading states. Mocked $fetch, ref, readonly, and File for Node environment. Test suite total: 89 passed (89).
+- [x] **Step 16**: Create Pinia sessions store in `app/stores/sessions.ts` (global state management)
+  - Note: Implemented `app/stores/sessions.ts` as a Pinia store with state (sessions, currentSession, isLoading, error), getters (getSessionById, hasSessions, sessionsCount), and actions (fetchSessions, createSession, fetchSession, deleteSession, uploadPdf, clearError, clearCurrentSession, $reset). Uses $fetch for API calls with centralized business logic. Created test `app/stores/__tests__/sessions.test.ts` with 27 tests covering initial state, all getters, all actions (success and error cases), loading state management, and utility methods. Mocked $fetch and File for Node environment. Test suite total: 99 passed (99).
+  - Design Decision: Using Pinia store directly instead of composable wrapper for simpler, more direct access. Components will call `useSessionsStore()` directly to access shared global state.
 - [ ] **Step 17**: Create SessionList component in `app/modules/sessions/components/SessionList.vue`
 - [ ] **Step 18**: Create SessionItem component in `app/modules/sessions/components/SessionItem.vue`
 - [ ] **Step 19**: Create NewSessionButton component in `app/modules/sessions/components/NewSessionButton.vue`
