@@ -257,10 +257,14 @@ CRITICAL: Every execution step in this plan MUST include:
 
 ### Phase 8: Frontend - Layout & Navigation
 
-- [ ] **Step 28**: Create main layout in `app/layouts/default.vue` with sidebar and main content area
-- [ ] **Step 29**: Create AppHeader component in `app/shared/components/AppHeader.vue`
-- [ ] **Step 30**: Create AppSidebar component in `app/shared/components/AppSidebar.vue`
-- [ ] **Step 31**: Create EmptyState component in `app/shared/components/EmptyState.vue`
+- [x] **Step 28**: Create main layout in `app/layouts/default.vue` with sidebar and main content area
+  - Note: Implemented `app/layouts/default.vue` as the main application layout. Features include collapsible sidebar (4rem collapsed, 16rem expanded), mobile-responsive design with hamburger menu and overlay, fixed sidebar with header/content/footer sections, smooth width transitions, Vue provide/inject for sidebar state sharing with child components, route change detection to auto-close mobile menu, named slots for sidebar content (sidebar, sidebar-footer), and main content area with margin adjustment based on sidebar state. Includes comprehensive dark mode support and mobile breakpoint at 768px.
+- [x] **Step 29**: Create AppHeader component in `app/shared/components/AppHeader.vue`
+  - Note: Implemented `app/shared/components/AppHeader.vue` for page headers. Props include title, subtitle, breadcrumbs (array of {label, to, icon}), showBack (boolean), backTo (custom back route), and class. Emits back event. Features include breadcrumb navigation with links and separators, back button with router integration (uses router.back() or custom route), title and subtitle display with ellipsis overflow, actions slot for header buttons, and responsive design with smaller title on mobile. Includes dark mode support.
+- [x] **Step 30**: Create AppSidebar component in `app/shared/components/AppSidebar.vue`
+  - Note: Implemented `app/shared/components/AppSidebar.vue` as the sidebar content component. Props include collapsed (boolean), maxSessions (default 10), and class. Emits sessionClick and sessionCreated events. Integrates with sessions store and uses SessionList and NewSessionButton components. Features include new chat button (adapts to collapsed state), scrollable session list with section title, home navigation link with active state styling, automatic navigation to new/clicked sessions, and session deletion with redirect if deleting current session. Router integration for current session detection.
+- [x] **Step 31**: Create EmptyState component in `app/shared/components/EmptyState.vue`
+  - Note: Implemented `app/shared/components/EmptyState.vue` for empty/placeholder states. Props include icon (default inbox), title, description, actionLabel, actionIcon, size (sm/md/lg), and class. Emits action event. Features include centered layout with icon in circular background, size variants affecting icon size, padding, and typography, optional action button using Nuxt UI UButton, default slot for custom content, and computed classes for size variants. Includes dark mode support. Test suite total: 218 passed (218).
 
 ### Phase 9: Frontend - Pages & Routing
 
