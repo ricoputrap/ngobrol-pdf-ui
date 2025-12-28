@@ -268,13 +268,17 @@ CRITICAL: Every execution step in this plan MUST include:
 
 ### Phase 9: Frontend - Pages & Routing
 
-- [ ] **Step 32**: Create home page in `app/pages/index.vue` (sessions list)
-- [ ] **Step 33**: Create chat page in `app/pages/chat/[id].vue` (individual chat session)
+- [x] **Step 32**: Create home page in `app/pages/index.vue` (sessions list)
+  - Note: Implemented `app/pages/index.vue` as the landing/home page. Uses default layout with definePageMeta. Features include welcome header with title and subtitle, loading state while fetching sessions, empty state with EmptyState component for new users, quick start section with cards for "New Chat" and "Recent Chats" (showing session count), "How It Works" section with 3-step guide (Upload PDF, Ask Questions, Get Answers), responsive grid layout for cards, integration with sessions store for fetching and displaying session count, navigation to chat page on session creation. Includes comprehensive dark mode support and mobile responsive styles.
+- [x] **Step 33**: Create chat page in `app/pages/chat/[id].vue` (individual chat session)
+  - Note: Implemented `app/pages/chat/[id].vue` as the individual chat session page. Uses dynamic route parameter for sessionId. Integrates useChat composable for message handling and SSE streaming. Features include AppHeader with session title, PDF filename subtitle, breadcrumbs, and back button, collapsible PdfUploader with slide transition, ChatMessageList with streaming message support, ChatInput with disabled state when no PDF uploaded, error banner with dismiss button, three empty states (loading, no PDF, has PDF but no messages), automatic session fetch on mount and sessionId change. Full integration with sessions store for session data. Includes comprehensive dark mode support, mobile responsive styles, and slide transitions for uploader and error banner. Test suite total: 218 passed (218).
 
 ### Phase 10: Main App Integration
 
-- [ ] **Step 34**: Update `app/app.vue` to use the default layout and routing
-- [ ] **Step 35**: Add app-wide styles and Nuxt UI theme configuration in `nuxt.config.ts`
+- [x] **Step 34**: Update `app/app.vue` to use the default layout and routing
+  - Note: Updated `app/app.vue` to serve as the root application component. Replaced NuxtWelcome with proper routing setup using NuxtLayout and NuxtPage components. Added NuxtRouteAnnouncer for accessibility, NuxtLoadingIndicator with blue theme color. Includes comprehensive global styles: CSS reset (box-sizing, margin, padding), system font stack, focus-visible outlines for accessibility, custom scrollbar styling, page and layout transition animations, and dark mode support. Ensures full viewport height and prevents horizontal overflow.
+- [x] **Step 35**: Add app-wide styles and Nuxt UI theme configuration in `nuxt.config.ts`
+  - Note: Updated `nuxt.config.ts` with comprehensive configuration. App head settings include title template, meta tags (charset, viewport, description, theme-color), and favicon. Added page and layout transitions with "out-in" mode. Runtime config for environment variables (apiSecret server-side, appName and apiBase public). Nuxt UI configured with heroicons. TypeScript strict mode and type checking enabled. Vite CSS preprocessor options placeholder. Nitro compressPublicAssets enabled. Route rules with CORS for API routes. Test suite total: 218 passed (218).
 
 ### Phase 11: Polish & Testing
 

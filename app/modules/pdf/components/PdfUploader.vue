@@ -79,7 +79,7 @@ const handleDrop = (event: DragEvent) => {
 
     const files = event.dataTransfer?.files;
     if (files && files.length > 0) {
-        selectFile(files[0]);
+        selectFile(files[0] as File);
     }
 };
 
@@ -98,7 +98,7 @@ const handleFileInputChange = (event: Event) => {
     const files = input.files;
 
     if (files && files.length > 0) {
-        selectFile(files[0]);
+        selectFile(files[0] as File);
     }
 };
 
@@ -190,7 +190,7 @@ const handleClear = () => {
             class="pdf-uploader__input"
             :disabled="props.disabled"
             @change="handleFileInputChange"
-        ></input>
+        />
 
         <!-- Actions -->
         <div v-if="selectedFile && !isSuccess" class="pdf-uploader__actions">
