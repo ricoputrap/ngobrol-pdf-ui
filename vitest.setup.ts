@@ -1,5 +1,33 @@
 import { vi } from "vitest";
 
+// Mock File class for browser APIs in Node environment
+class MockFile {
+  public name: string;
+  public size: number;
+  public type: string;
+  private content: BlobPart[];
+
+  constructor(bits: BlobPart[], name: string, options?: FilePropertyBag) {
+    this.content = bits;
+    this.name = name;
+    this.type = options?.type || "";
+
+    // Calculate size
+    this.size = bits.reduce((acc, bit) => {
+      if (typeof bit === "string") {
+        return acc + bit.length;
+      } else if (bit instanceof ArrayBuffer) {
+        return acc + bit.byteLength;
+      } else if (ArrayBuffer.isView(bit)) {
+        return acc + bit.byteLength;
+      }
+      return acc;
+    }, 0);
+  }
+}
+
+globalThis.File = MockFile as any;
+
 // Mock Nuxt's auto-imported defineEventHandler
 globalThis.defineEventHandler = vi.fn((handler: Function) => handler);
 
