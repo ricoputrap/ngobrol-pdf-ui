@@ -211,7 +211,8 @@ CRITICAL: Every execution step in this plan MUST include:
 
 ### Phase 4: Server API - Message Endpoints
 
-- [ ] **Step 12**: Create POST message endpoint in `server/api/messages/index.post.ts`
+- [x] **Step 12**: Create POST message endpoint in `server/api/messages/index.post.ts`
+  - Note: Implemented `server/api/messages/index.post.ts` and test `server/api/messages/__tests__/index.post.test.ts`. All 11 tests pass: sends user message and generates assistant response, returns 404 for non-existent session, returns 400 for missing session_id/content/empty content/invalid types, handles multiple messages in conversation, generates deterministic responses, updates session timestamp, verifies snake_case fields. Test suite total: 49 passed (49).
 - [ ] **Step 13**: Create GET SSE stream endpoint in `server/api/messages/stream.get.ts`
 - [ ] **Step 14**: Create health check endpoint in `server/api/health.get.ts`
 
