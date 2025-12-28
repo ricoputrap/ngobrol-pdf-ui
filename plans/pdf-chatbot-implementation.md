@@ -222,7 +222,8 @@ CRITICAL: Every execution step in this plan MUST include:
 
 - [x] **Step 15**: Create session types in `app/modules/sessions/types.ts`
   - Note: Implemented `app/modules/sessions/types.ts` with frontend types for Session, Message, and API response/request types. All types use snake_case to match backend API. Created test `app/modules/sessions/__tests__/types.test.ts` with 11 tests validating type structures, null handling, snake_case naming convention. Test suite total: 72 passed (72).
-- [ ] **Step 16**: Create session composable in `app/modules/sessions/composables/useSessions.ts` (API integration)
+- [x] **Step 16**: Create session composable in `app/modules/sessions/composables/useSessions.ts` (API integration)
+  - Note: Implemented `app/modules/sessions/composables/useSessions.ts` with methods for fetchSessions, createSession, fetchSession, deleteSession, uploadPdf, and utility methods. Uses $fetch for API calls with reactive state (sessions, currentSession, isLoading, error). Created test `app/modules/sessions/composables/__tests__/useSessions.test.ts` with 17 tests covering all methods, error handling, local state updates, and loading states. Mocked $fetch, ref, readonly, and File for Node environment. Test suite total: 89 passed (89).
 - [ ] **Step 17**: Create SessionList component in `app/modules/sessions/components/SessionList.vue`
 - [ ] **Step 18**: Create SessionItem component in `app/modules/sessions/components/SessionItem.vue`
 - [ ] **Step 19**: Create NewSessionButton component in `app/modules/sessions/components/NewSessionButton.vue`
