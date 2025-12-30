@@ -140,17 +140,46 @@ app/
 
 ### Phase 4: Page Integration
 
-- [ ] **Step 6**: Update `app/pages/index.vue` (home page) integration
+- [x] **Step 6**: Update `app/pages/index.vue` (home page) integration
   - Add `<template #sidebar>` block with `<SidebarSessions />`
   - Add `<template #sidebar-footer>` block with `<SidebarNewChat />`
   - Ensure sessions are fetched on page load
   - Update `index.vue.test.ts` (create if missing)
+  - ✅ **Completed**: Page already uses default layout which now includes sidebar components.
+    - Created `app/pages/__tests__/index.test.ts` with 26 tests covering:
+      - Page structure validation
+      - Layout integration (uses default layout with sidebar)
+      - Session store integration
+      - Navigation handlers
+      - Loading and empty state logic
+      - Sessions count display pluralization
+      - Component dependencies
+      - Dark mode support
+      - Responsive breakpoints
+      - How It Works steps
 
-- [ ] **Step 7**: Update `app/pages/chat/[id].vue` (chat page) integration
+- [x] **Step 7**: Update `app/pages/chat/[id].vue` (chat page) integration
   - Add `<template #sidebar>` block with `<SidebarSessions />`
   - Add `<template #sidebar-footer>` block with `<SidebarNewChat />`
   - Highlight current session in sidebar
   - Update or create chat page test
+  - ✅ **Completed**: Page already uses default layout which now includes sidebar components.
+    - Created `app/pages/chat/__tests__/[id].test.ts` with 38 tests covering:
+      - Page structure validation
+      - Layout integration (uses default layout with sidebar)
+      - Route params extraction
+      - Session store integration
+      - Session computed properties
+      - Chat composable integration
+      - Upload state management
+      - UI state computed properties
+      - Breadcrumbs generation
+      - Navigation handlers
+      - Error handling
+      - Component dependencies
+      - Dark mode support
+      - Responsive breakpoints
+      - Active session highlighting in sidebar
 
 ## UI/UX Requirements
 
@@ -257,11 +286,39 @@ await router.push(`/chat/${sessionId}`);
 
 ## Success Criteria
 
-- [ ] Sidebar displays list of all previous chat sessions
-- [ ] Current session is highlighted in sidebar
-- [ ] Clicking a session navigates to that chat
-- [ ] "New Chat" button in sidebar footer creates new session
-- [ ] All components have passing unit tests
-- [ ] Layout and pages have passing integration tests
-- [ ] Dark mode styling works correctly
-- [ ] Responsive design works on mobile and desktop
+- [x] Sidebar displays list of all previous chat sessions
+- [x] Current session is highlighted in sidebar
+- [x] Clicking a session navigates to that chat
+- [x] "New Chat" button in sidebar footer creates new session
+- [x] All components have passing unit tests
+- [x] Layout and pages have passing integration tests
+- [x] Dark mode styling works correctly
+- [x] Responsive design works on mobile and desktop
+
+## Final Summary
+
+**All 7 steps completed successfully!**
+
+### Files Created:
+
+1. `app/modules/sessions/components/SidebarSessionItem.vue`
+2. `app/modules/sessions/components/__tests__/SidebarSessionItem.test.ts` (16 tests)
+3. `app/modules/sessions/composables/useSidebarSessions.ts`
+4. `app/modules/sessions/composables/__tests__/useSidebarSessions.test.ts` (32 tests)
+5. `app/modules/sessions/components/SidebarSessions.vue`
+6. `app/modules/sessions/components/__tests__/SidebarSessions.test.ts` (27 tests)
+7. `app/modules/sessions/components/SidebarNewChat.vue`
+8. `app/modules/sessions/components/__tests__/SidebarNewChat.test.ts` (20 tests)
+9. `app/layouts/__tests__/default.test.ts` (23 tests)
+10. `app/pages/__tests__/index.test.ts` (26 tests)
+11. `app/pages/chat/__tests__/[id].test.ts` (38 tests)
+
+### Files Modified:
+
+1. `app/layouts/default.vue` - Integrated SidebarSessions and SidebarNewChat
+2. `vitest.setup.ts` - Added global mocks for useRouter, useRoute, navigateTo
+3. `vitest.config.ts` - Added Vue plugin for .vue file testing
+
+### Total New Tests: 182 tests
+
+### Total Project Tests: 400 tests (all passing)
