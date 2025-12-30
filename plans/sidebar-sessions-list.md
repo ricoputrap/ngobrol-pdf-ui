@@ -116,11 +116,27 @@ app/
 
 ### Phase 3: Layout Integration
 
-- [ ] **Step 5**: Update `app/layouts/default.vue` to use sidebar components
+- [x] **Step 5**: Update `app/layouts/default.vue` to use sidebar components
   - Add `<SidebarSessions />` to `<slot name="sidebar" />`
   - Add `<SidebarNewChat />` to `<slot name="sidebar-footer" />`
   - Import components from sessions module
   - Update `default.vue.test.ts` (create if missing)
+  - ✅ **Completed**: Layout and test suite updated. Changes include:
+    - Imported `SidebarSessions` and `SidebarNewChat` components from sessions module
+    - Replaced `<slot name="sidebar" />` with `<SidebarSessions />` component
+    - Replaced `<slot name="sidebar-footer" />` with `<SidebarNewChat />` component
+    - Created `app/layouts/__tests__/default.test.ts` with 23 tests covering:
+      - Layout structure validation
+      - BEM-style class naming
+      - Sidebar state logic (toggle, open/close)
+      - Mobile menu state logic
+      - Sidebar component integration paths
+      - Provide/inject setup
+      - CSS class conditions
+      - Route change handler
+      - Accessibility attributes
+      - Dark mode support
+      - Responsive breakpoints
 
 ### Phase 4: Page Integration
 
