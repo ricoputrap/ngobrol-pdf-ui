@@ -55,10 +55,26 @@ app/
     - Full dark mode support
       Test suite: 16 passing tests covering type validation, truncation logic, date formatting, icon logic, props structure, and event emitters.
 
-- [ ] **Step 2**: Create `useSidebarSessions.ts` composable **AND** create `useSidebarSessions.test.ts`
+- [x] **Step 2**: Create `useSidebarSessions.ts` composable **AND** create `useSidebarSessions.test.ts`
   - Path: `app/modules/sessions/composables/useSidebarSessions.ts`
-  - Path: `app/modules/sessions/composables/__test__/useSidebarSessions.test.ts`
+  - Path: `app/modules/sessions/composables/__tests__/useSidebarSessions.test.ts`
   - Features: Session filtering, sorting (most recent first), search/filter capability, active session tracking
+  - ✅ **Completed**: Composable and test suite created.
+  - 🔧 **Refactored**: Simplified architecture to avoid redundant computed values:
+    - **Before (problematic):** 3 separate computed values (`sortedSessions`, `filteredSessions`, `recentSessions`) causing 3x sorting overhead
+    - **After (optimized):** Single `displaySessions` computed for UI, internal `sortedSessions` as base layer
+    - Removed redundant `recentSessions` (can be added as optional filter if needed)
+    - Renamed `filteredSessions` → `displaySessions` (clearer intent)
+  - Composable now includes:
+    - `displaySessions`: Single source of truth for UI (sorted + search filtered)
+    - `activeSession`: Current session object
+    - Session data access from Pinia store
+    - Active session tracking with reactive state
+    - Search functionality with case-insensitive filtering
+    - Manual refresh capability
+    - Auto-refresh on mount (30s interval)
+    - Smart watchers for session state management
+  - Test suite: 32 passing tests covering session data access, active tracking, sorting, filtering, search management, methods, and return structure.
 
 ### Phase 2: Main Sidebar Component
 
