@@ -78,12 +78,25 @@ app/
 
 ### Phase 2: Main Sidebar Component
 
-- [ ] **Step 3**: Create `SidebarSessions.vue` component **AND** create `SidebarSessions.test.vue`
+- [x] **Step 3**: Create `SidebarSessions.vue` component **AND** create `SidebarSessions.test.ts`
   - Path: `app/modules/sessions/components/SidebarSessions.vue`
-  - Path: `app/modules/sessions/components/SidebarSessions.test.vue`
+  - Path: `app/modules/sessions/components/__tests__/SidebarSessions.test.ts`
   - Features: List of sessions, loading state, empty state, scrollable list, click navigation
   - Dependencies: `useSessionsStore`, `SidebarSessionItem`
   - Auto-refresh sessions on mount and periodically
+  - ✅ **Completed**: Component and test suite created. Component includes:
+    - Header with "Recent Chats" title
+    - Search toggle button and refresh button
+    - Collapsible search bar with clear functionality
+    - Loading skeleton state (3 placeholder items)
+    - Empty state with icon and call-to-action
+    - No search results state
+    - Scrollable session list with SidebarSessionItem children
+    - Session click navigation to `/chat/{id}`
+    - Delete with confirmation dialog and error handling
+    - Concurrent delete prevention
+    - Dark mode support
+  - Test suite: 27 passing tests covering component structure, search logic, empty state logic, toggle search, delete logic, active session logic, search input handling, loading state, and session list rendering logic.
 
 - [ ] **Step 4**: Create `SidebarNewChat.vue` component **AND** create `SidebarNewChat.test.vue`
   - Path: `app/modules/sessions/components/SidebarNewChat.vue`
