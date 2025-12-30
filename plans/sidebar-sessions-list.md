@@ -98,11 +98,21 @@ app/
     - Dark mode support
   - Test suite: 27 passing tests covering component structure, search logic, empty state logic, toggle search, delete logic, active session logic, search input handling, loading state, and session list rendering logic.
 
-- [ ] **Step 4**: Create `SidebarNewChat.vue` component **AND** create `SidebarNewChat.test.vue`
+- [x] **Step 4**: Create `SidebarNewChat.vue` component **AND** create `SidebarNewChat.test.ts`
   - Path: `app/modules/sessions/components/SidebarNewChat.vue`
-  - Path: `app/modules/sessions/components/SidebarNewChat.test.vue`
+  - Path: `app/modules/sessions/components/__tests__/SidebarNewChat.test.ts`
   - Features: "New Chat" button, icon, navigation to home or create new session
   - Placement: Sidebar footer slot
+  - ✅ **Completed**: Component and test suite created. Component includes:
+    - Full-width "New Chat" button with plus icon
+    - Blue primary button styling with hover state
+    - Border-top separator for footer placement
+    - Proper accessibility (aria-label, aria-hidden on icon)
+    - Focus ring styles with dark mode offset
+    - Transition effects for smooth interactions
+    - Navigation to home page (`/`) on click
+  - Test suite: 20 passing tests covering component structure, button content, accessibility, navigation behavior, dark mode support, styling/layout, and button states.
+  - Also updated `vitest.setup.ts` to add global mocks for `useRouter`, `useRoute`, and `navigateTo`.
 
 ### Phase 3: Layout Integration
 

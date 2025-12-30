@@ -1,4 +1,5 @@
 import { vi } from "vitest";
+import { ref } from "vue";
 
 // Mock File class for browser APIs in Node environment
 class MockFile {
@@ -30,6 +31,27 @@ globalThis.File = MockFile as any;
 
 // Mock Nuxt's auto-imported defineEventHandler
 globalThis.defineEventHandler = vi.fn((handler: Function) => handler);
+
+// Mock Nuxt's auto-imported useRouter
+const mockRouter = {
+  push: vi.fn(() => Promise.resolve()),
+  replace: vi.fn(() => Promise.resolve()),
+  back: vi.fn(),
+  forward: vi.fn(),
+  go: vi.fn(),
+  currentRoute: ref({
+    path: "/",
+    params: {},
+    query: {},
+  }),
+};
+(globalThis as any).useRouter = vi.fn(() => mockRouter);
+
+// Mock Nuxt's auto-imported useRoute
+(globalThis as any).useRoute = vi.fn(() => mockRouter.currentRoute.value);
+
+// Mock Nuxt's auto-imported navigateTo
+(globalThis as any).navigateTo = vi.fn(() => Promise.resolve());
 
 // Mock Nuxt's auto-imported readBody
 globalThis.readBody = vi.fn(async (event: any) => {
